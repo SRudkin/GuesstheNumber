@@ -1,23 +1,19 @@
-Add-Type -AssemblyName System.Speech
- 
 [int]$guess = 0
 [int]$attempt = 0
-[int]$number = Get-Random -Minimum 1 -Maximum 100
+[int]$number = Get-Random -Minimum 1 -Maximum 10
 $user=write-host "Tell me your name" 
 $currentPickleholder = "Who has the pickle" 
-$voice = New-Object System.Speech.Synthesis.SpeechSynthesizer
 
 if ($user = $currentPickleholder)
-{$voice.Speak("Hello there $user, I have stolen your pickle, but I am feeling charitable today so,  If you want it back youll have to break it out of my safe. 
+{write-host "Hello there $user, I have stolen your pickle, but I am feeling charitable today so,  If you want it back youll have to break it out of my safe. 
               The combination is a number between between 1 and 10. I'll give you 3 tries to guess it or the pickle is mine.
 }
 else {
-$voice.Speak("Hello There! I'm the Dreaded Poor Customer Service Bot! and I have taken the pickle from $currentPickleholder !
-              The combination is a number between between 1 and 10. I'll give you 3 tries to guess it or the pickle is mine.")}
-              
+write-host "Hello There! I'm the Dreaded Poor Customer Service Bot! and I have taken the pickle from $currentPickleholder !
+              The combination is a number between between 1 and 10. I'll give you 3 tries to guess it or the pickle is mine."              
  
 do {
-    $voice.SpeakAsync("What's your guess?") | Out-Null
+    write-host "What's your guess?" | Out-Null
  
     try {
         $guess = Read-Host "So what's your guess?"
@@ -27,15 +23,15 @@ do {
         }
     }
     catch {
-        $voice.Speak("Invalid number")
+        write-host "Invalid number"
         continue
     }
  
     if ($guess -lt $number) {
-        $voice.Speak("Too Low, like your service score!")
+        write-host "Too Low, like your service score!"
     }
     elseif ($guess -gt $number) {
-        $voice.Speak("Your aiming to high! Try something more your speed!")
+        write-host "Your aiming to high! Try something more your speed!"
     }
  
     $attempt += 1
@@ -43,10 +39,10 @@ do {
 until ($guess -eq $number -or $attempt -eq 3)
  
 if ($guess -eq $number) {
-    $voice.Speak("No! You have unlocked my Safe! Ill be back again to retake my prize next month $user")
+  write-host "No! You have unlocked my Safe! Ill be back again to retake my prize next month $user"
 }
-else { if($user=currentPickleholder) {$voice.speak (Gah! you have guessed the passcode! Take your dumb pickle back! Ill return next month for whats mine") 
+else { if($user=$currentPickleholder) {write-host "Gah! you have guessed the passcode! Take your dumb pickle back! Ill return next month for whats mine") 
 
-   else { $voice.Speak("Your out of guesses! Better luck next time $user, tell $currentPickleholder that you failed!
-                  My secret number was $number")} 
+   else { write-host "Your out of guesses! Better luck next time $user, tell $currentPickleholder that you failed!
+                  My secret number was $number"} 
 }
