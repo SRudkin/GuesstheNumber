@@ -1,23 +1,22 @@
 [int]$guess = 0
 [int]$attempt = 0
 [int]$number = Get-Random -Minimum 1 -Maximum 10
-$user=write-host "Tell me your name" 
-$currentPickleholder = "Who has the pickle" 
+$user= read-host "Tell me your name" 
+$currentPickleholder = read-host "Who has the pickle" 
 
-if ($user = $currentPickleholder)
+if ($user -eq $currentPickleholder)
 {write-host "Hello there $user, I have stolen your pickle, but I am feeling charitable today so,  If you want it back youll have to break it out of my safe. 
-              The combination is a number between between 1 and 10. I'll give you 3 tries to guess it or the pickle is mine.
+The combination is a number between between 1 and 10. I'll give you 3 tries to guess it or the pickle is mine."
 }
 else {
-write-host "Hello There! I'm the Dreaded Poor Customer Service Bot! and I have taken the pickle from $currentPickleholder !
-              The combination is a number between between 1 and 10. I'll give you 3 tries to guess it or the pickle is mine."              
+write-host "Hello There $user! I'm the Dreaded Poor Customer Service Bot! and I have taken the pickle from $currentPickleholder !
+The code is a number between between 1 and 10. I'll give you 3 tries to guess it or the pickle is mine."}              
  
 do {
     write-host "What's your guess?" | Out-Null
  
     try {
-        $guess = Read-Host "So what's your guess?"
- 
+        $guess = Read-Host  
         if ($guess -lt 1 -or $guess -gt 10) {
             throw
         }
@@ -41,8 +40,8 @@ until ($guess -eq $number -or $attempt -eq 3)
 if ($guess -eq $number) {
   write-host "No! You have unlocked my Safe! Ill be back again to retake my prize next month $user"
 }
-else { if($user=$currentPickleholder) {write-host "Gah! you have guessed the passcode! Take your dumb pickle back! Ill return next month for whats mine") 
+else { if($user -eq $currentPickleholder) {write-host "Gah! you have guessed the passcode! Take your dumb pickle back! Ill return next month for whats mine"}
 
-   else { write-host "Your out of guesses! Better luck next time $user, tell $currentPickleholder that you failed!
-                  My secret number was $number"} 
-}
+   elseif ($attempt -eq 3) { write-host "Your out of guesses! Better luck next time $user, tell $currentPickleholder that you failed!
+ My combination was $number"} 
+                  }
