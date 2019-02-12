@@ -45,3 +45,4 @@ else { if($user -eq $currentPickleholder) {write-host "Gah! you have guessed the
    elseif ($attempt -eq 3) { write-host "Your out of guesses! Better luck next time $user, tell $currentPickleholder that you failed!
  My combination was $number"} 
                   }
+read-host "press enter to exit" 
